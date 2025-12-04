@@ -1,6 +1,4 @@
-﻿using AdventOfCode2025.Puzzles;
-
-namespace AdventOfCode2025
+﻿namespace AdventOfCode2025
 {
     class Program
     {

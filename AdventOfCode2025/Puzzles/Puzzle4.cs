@@ -23,23 +23,6 @@ namespace AdventOfCode2025.Puzzles
             Console.WriteLine($"Sum: {sum}");
         }
 
-        private static List<string> GetExampleData()
-        {
-            return new List<string>
-            {
-                "..@@.@@@@.",
-                "@@@.@.@.@@",
-                "@@@@@.@.@@",
-                "@.@@@@..@.",
-                "@@.@@@@.@@",
-                ".@@@@@@@.@",
-                ".@.@.@.@@@",
-                "@.@@@.@@@@",
-                ".@@@@@@@@.",
-                "@.@.@@@.@.",
-            };
-        }
-
         public void Part2(bool example)
         {
             // Example data
@@ -102,6 +85,23 @@ namespace AdventOfCode2025.Puzzles
             }
 
             return count;
+        }
+
+        private static List<string> GetExampleData()
+        {
+            return new List<string>
+            {
+                "..@@.@@@@.",
+                "@@@.@.@.@@",
+                "@@@@@.@.@@",
+                "@.@@@@..@.",
+                "@@.@@@@.@@",
+                ".@@@@@@@.@",
+                ".@.@.@.@@@",
+                "@.@@@.@@@@",
+                ".@@@@@@@@.",
+                "@.@.@@@.@.",
+            };
         }
     }
 }
