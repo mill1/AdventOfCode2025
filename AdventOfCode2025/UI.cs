@@ -4,49 +4,66 @@ namespace AdventOfCode2025
 {
     public class UI
     {
+        private readonly Dictionary<string, Action<bool>> _menu;
+
+        public UI()
+        {
+            _menu = new Dictionary<string, Action<bool>>(StringComparer.OrdinalIgnoreCase)
+            {
+                ["1a"] = new Puzzle1().Part1,
+                ["1b"] = new Puzzle1().Part2,
+                ["2a"] = new Puzzle2().Part1,
+                ["2b"] = new Puzzle2().Part2,
+                ["3a"] = new Puzzle3().Part1,
+                ["3b"] = new Puzzle3().Part2,
+                ["4a"] = new Puzzle4().Part1,
+                ["4b"] = new Puzzle4().Part2,
+                ["5a"] = new Puzzle5().Part1,
+                ["5b"] = new Puzzle5().Part2,
+            };
+        }
+
         public void Run()
         {
-            bool quit = false;
-
-            while (!quit)
+            while (true)
             {
-                Action<bool> puzzleTarget = InvalidOption;
+                Console.WriteLine("\r\nWhich puzzle? (e.g. 2a). Available: " + string.Join(", ", _menu.Keys));
+                Console.WriteLine("Or enter q to quit.");
+                var answer = (Console.ReadLine() ?? "").Trim();
 
-                Console.WriteLine("Which puzzle? (Day 2 Part 1 = 2a, q to quit)");
-                var answer = Console.ReadLine();
+                if (string.Equals(answer, "q", StringComparison.OrdinalIgnoreCase))
+                    return;
 
-                switch (answer)
+                if (!_menu.TryGetValue(answer, out var puzzleAction))
                 {
-                    case "1a": puzzleTarget = new Puzzle1().Part1; break;
-                    case "1b": puzzleTarget = new Puzzle1().Part2; break;
-                    case "2a": puzzleTarget = new Puzzle2().Part1; break;
-                    case "2b": puzzleTarget = new Puzzle2().Part2; break;
-                    case "3a": puzzleTarget = new Puzzle3().Part1; break;
-                    case "3b": puzzleTarget = new Puzzle3().Part2; break;
-                    case "4a": puzzleTarget = new Puzzle4().Part1; break;
-                    case "4b": puzzleTarget = new Puzzle4().Part2; break;
-
-                    case "q": quit = true; continue;
-
-                    default:
-                         break;
+                    WriteLineFormatted(ConsoleColor.DarkBlue,ConsoleColor.Yellow, "Invalid option");
+                    continue;
                 }
 
-                Console.WriteLine("Example data? (y/n)");
-                bool example = Console.ReadLine() == "y";
-
-                puzzleTarget(example);
+                Console.Write("Example data? (y/n) ");
+                bool useExample = string.Equals(Console.ReadLine() ?? "", "y", StringComparison.OrdinalIgnoreCase);
+                RunPuzzle(puzzleAction, useExample);
             }
         }
 
-        public void InvalidOption(bool dummy)
+        private void RunPuzzle(Action<bool> puzzleAction, bool useExample)
         {
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Invalid option");
-            Console.ResetColor();
+            try
+            {
+                puzzleAction(useExample);
+            }
+            catch (Exception ex)
+            {
+                WriteLineFormatted(ConsoleColor.Black, ConsoleColor.Red, $"Error while running puzzle: {ex.Message}");
+            }
         }
 
-        private record MenuItem(string Label, string Key, Action Action);
+        private void WriteLineFormatted(ConsoleColor backgroundColor, ConsoleColor foregroundColor, string? value)
+        {
+            Console.BackgroundColor = backgroundColor;
+            Console.ForegroundColor = foregroundColor;
+            Console.WriteLine(value);
+            Console.ResetColor();
+        }
     }
 }

@@ -4,16 +4,10 @@ namespace AdventOfCode2025.Puzzles
 {
     internal class Puzzle2 : IPuzzle
     {
-        public void Part1(bool example)
+        public void Part1(bool useExample)
         {
             {
-                // example input
-                string input =
-                    GetExampleData();
-
-                // puzzle input:
-                if (!example)
-                    input = File.ReadAllText(@"Puzzles\Input\InputPuzzle2.txt").Trim();
+                string input = useExample ? GetExampleData() : File.ReadAllText(@"Puzzles\Input\InputPuzzle2.txt").Trim();
 
                 long total = 0;
 
@@ -46,15 +40,9 @@ namespace AdventOfCode2025.Puzzles
             }
         }
 
-        public void Part2(bool example)
+        public void Part2(bool useExample)
         {
-            // example input
-            string input =
-                GetExampleData();
-
-            // puzzle input:
-            if (!example)
-                input = File.ReadAllText(@"Puzzles\Input\InputPuzzle2.txt").Trim();
+            string input = useExample ? GetExampleData() : File.ReadAllText(@"Puzzles\Input\InputPuzzle2.txt").Trim();
 
             long total = 0;
 

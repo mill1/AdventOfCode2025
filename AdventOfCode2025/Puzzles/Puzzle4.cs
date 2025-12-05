@@ -4,13 +4,9 @@ namespace AdventOfCode2025.Puzzles
 {
     public class Puzzle4 : IPuzzle
     {
-        public void Part1(bool example)
+        public void Part1(bool useExample)
         {
-            // Example data
-            var grid = GetExampleData();
-
-            if (!example)
-                grid = File.ReadAllLines(@"Puzzles\Input\InputPuzzle4.txt").ToList();
+            var grid = useExample ? GetExampleData() : File.ReadAllLines(@"Puzzles\Input\InputPuzzle4.txt").ToList();
 
             var sum = 0;
 
@@ -23,13 +19,9 @@ namespace AdventOfCode2025.Puzzles
             Console.WriteLine($"Sum: {sum}");
         }
 
-        public void Part2(bool example)
+        public void Part2(bool useExample)
         {
-            // Example data
-            var grid = GetExampleData();
-
-            if (!example)
-                grid = File.ReadAllLines(@"Puzzles\Input\InputPuzzle4.txt").ToList();
+            var grid = useExample ? GetExampleData() : File.ReadAllLines(@"Puzzles\Input\InputPuzzle4.txt").ToList();
 
             int removedCount = 1;
             int sum = 0;

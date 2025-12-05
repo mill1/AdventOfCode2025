@@ -4,18 +4,13 @@ namespace AdventOfCode2025.Puzzles
 {
     public class Puzzle3 : IPuzzle
     {
-        public void Part1(bool example)
+        public void Part1(bool useExample)
         {
-            // Example data
-            var list = GetExampleData();
-
-            // read content from file 
-            if (!example)
-                list = File.ReadAllLines(@"Puzzles\Input\InputPuzzle3.txt").ToList();
+            var lines = useExample ? GetExampleData() : File.ReadAllLines(@"Puzzles\Input\InputPuzzle3.txt").ToList();
 
             int sum = 0;
 
-            foreach (var item in list)
+            foreach (var item in lines)
             {
                 int highest = 0;
                 int indexOfHighest = -1;
@@ -49,17 +44,13 @@ namespace AdventOfCode2025.Puzzles
             Console.WriteLine($"Sum: {sum}");
         }
 
-        public void Part2(bool example)
+        public void Part2(bool useExample)
         {
-            var list = GetExampleData();
-
-            // read content from file 
-            if (!example)
-                list = File.ReadAllLines(@"Puzzles\Input\InputPuzzle3.txt").ToList();
+            var lines = useExample ? GetExampleData() : File.ReadAllLines(@"Puzzles\Input\InputPuzzle3.txt").ToList();
 
             long sum = 0;
 
-            foreach (var item in list)
+            foreach (var item in lines)
             {
                 const int keep = 12; // number of digits to keep
                 int toRemove = item.Length - keep;
