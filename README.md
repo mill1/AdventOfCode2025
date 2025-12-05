@@ -1,6 +1,6 @@
-# Advent of Code 2025 — My Festive Puzzle Forge 🎁✨
+# Advent of Code 2025 — Solutions ⭐🎁✨
 
-This repo holds my solutions for **Advent of Code 2025**
+This repo holds my solutions for the puzzles of the **Advent of Code 2025**
 
 ## 🎄 What’s Inside?
 
@@ -20,5 +20,3 @@ Each puzzle can run using either:
 
 - Hand-crafted example data (as tradition demands), or
 - Real input loaded from `Puzzles/Input/`
-
-Happy coding, and **⭐ Merry Code-mas! ⭐**
