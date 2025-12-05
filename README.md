@@ -1,6 +1,6 @@
 # Advent of Code 2025 — Solutions ⭐🎁✨
 
-This repo holds my solutions for the puzzles of the **Advent of Code 2025**
+This repo holds my solutions for the puzzles of the **[Advent of Code 2025](https://adventofcode.com/)**
 
 ## 🎄 What’s Inside?
 
