@@ -46,9 +46,13 @@ namespace AdventOfCode2025.Puzzles
                     newGrid[i] = new string(newRow);
                 }
 
-                // Print updated grid
-                //foreach (var row in newGrid)
-                //    Console.WriteLine(row);
+                if (useExample)
+                {
+                    // Print updated grid
+                    Console.WriteLine();
+                    foreach (var row in newGrid)
+                        Console.WriteLine(row);
+                }
 
                 Console.WriteLine($"Removed: {removedCount}");
                 sum += removedCount;

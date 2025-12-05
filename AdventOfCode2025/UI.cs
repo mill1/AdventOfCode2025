@@ -8,6 +8,8 @@ namespace AdventOfCode2025
 
         public UI()
         {
+            PrintBanner();
+
             _menu = new Dictionary<string, Action<bool>>(StringComparer.OrdinalIgnoreCase)
             {
                 ["1a"] = new Puzzle1().Part1,
@@ -27,22 +29,30 @@ namespace AdventOfCode2025
         {
             while (true)
             {
-                Console.WriteLine("\r\nWhich puzzle? (e.g. 2a). Available: " + string.Join(", ", _menu.Keys));
-                Console.WriteLine("Or enter q to quit.");
+                WriteLineFormatted(ConsoleColor.Black, ConsoleColor.Yellow, "\r\nWhich puzzle? (e.g. 2a for Day 2 part 1)." +
+                    "\r\nAvailable: " + string.Join(", ", _menu.Keys));
+                WriteLineFormatted(ConsoleColor.Black, ConsoleColor.Yellow, "Or enter h for help or q to quit.");
+                
                 var answer = (Console.ReadLine() ?? "").Trim();
 
-                if (string.Equals(answer, "q", StringComparison.OrdinalIgnoreCase))
-                    return;
-
-                if (!_menu.TryGetValue(answer, out var puzzleAction))
+                switch (answer)
                 {
-                    WriteLineFormatted(ConsoleColor.DarkBlue,ConsoleColor.Yellow, "Invalid option");
-                    continue;
+                    case "q":
+                        return;
+                    case "h":
+                        Console.WriteLine("https://www.youtube.com/watch?v=2Q_ZzBGPdqE&list=RD2Q_ZzBGPdqE");
+                        break;
+                    default:
+                        if (!_menu.TryGetValue(answer, out var puzzleAction))
+                        {
+                            WriteLineFormatted(ConsoleColor.White, ConsoleColor.DarkMagenta, "Invalid option");
+                            continue;
+                        }
+                        WriteLineFormatted(ConsoleColor.Black, ConsoleColor.Yellow, "Example data? (y/n)");
+                        bool useExample = string.Equals(Console.ReadLine() ?? "", "y", StringComparison.OrdinalIgnoreCase);
+                        RunPuzzle(puzzleAction, useExample);
+                        break;
                 }
-
-                Console.Write("Example data? (y/n) ");
-                bool useExample = string.Equals(Console.ReadLine() ?? "", "y", StringComparison.OrdinalIgnoreCase);
-                RunPuzzle(puzzleAction, useExample);
             }
         }
 
@@ -56,6 +66,16 @@ namespace AdventOfCode2025
             {
                 WriteLineFormatted(ConsoleColor.Black, ConsoleColor.Red, $"Error while running puzzle: {ex.Message}");
             }
+        }
+
+        private void PrintBanner()
+        {
+            const int Width = 41;
+
+            var lines = new[] { "", "", "Advent of Code 2025", "", "*** Solutions ***", "", "" };
+
+            foreach (var line in lines)
+                WriteLineFormatted(ConsoleColor.DarkBlue, ConsoleColor.Cyan, line.PadLeft((Width + line.Length) / 2).PadRight(Width));
         }
 
         private void WriteLineFormatted(ConsoleColor backgroundColor, ConsoleColor foregroundColor, string? value)
