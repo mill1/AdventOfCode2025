@@ -20,9 +20,7 @@ namespace AdventOfCode2025.Puzzles
                     for (long id = start; id <= end; id++)
                     {
                         if (IsRepeatedPattern(id.ToString()))
-                        {
                             total += id;
-                        }
                     }
                 }
 
@@ -55,9 +53,7 @@ namespace AdventOfCode2025.Puzzles
                 for (long id = start; id <= end; id++)
                 {
                     if (IsRepeatedPattern(id.ToString()))
-                    {
                         total += id;
-                    }
                 }
             }
 

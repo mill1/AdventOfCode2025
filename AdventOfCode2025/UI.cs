@@ -7,9 +7,7 @@ namespace AdventOfCode2025
         private readonly Dictionary<string, Action<bool>> _menu;
 
         public UI()
-        {
-            PrintBanner();
-
+        {           
             _menu = new Dictionary<string, Action<bool>>(StringComparer.OrdinalIgnoreCase)
             {
                 ["1a"] = new Puzzle1().Part1,
@@ -29,6 +27,8 @@ namespace AdventOfCode2025
 
         public void Run()
         {
+            PrintBanner();
+
             while (true)
             {
                 WriteFormatted(ConsoleColor.Black, ConsoleColor.Yellow, "\r\nWhich puzzle? (e.g. 2a for Day 2 part 1)." +
@@ -66,8 +66,7 @@ namespace AdventOfCode2025
             }
             catch (Exception ex)
             {
-                WriteFormatted(ConsoleColor.Black, ConsoleColor.Red, $"Error while running puzzle: {ex.Message}");
-               
+                WriteFormatted(ConsoleColor.Black, ConsoleColor.Red, $"Error while running puzzle: {ex.Message}");               
             }
         }
 
@@ -96,7 +95,6 @@ namespace AdventOfCode2025
             else
                 Console.Write(value);
 
-            //Console.ResetColor() -> faulty;
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
         }

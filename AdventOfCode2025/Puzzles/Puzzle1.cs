@@ -51,13 +51,9 @@ namespace AdventOfCode2025.Puzzles
                 for (int i = 0; i < distance; i++)
                 {
                     if (dir == 'R')
-                    {
                         position = (position + 1) % 100;
-                    }
                     else // 'L'
-                    {
                         position = (position - 1 + 100) % 100;
-                    }
 
                     if (position == 0)
                         zeroCount++;

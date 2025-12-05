@@ -8,7 +8,7 @@ namespace AdventOfCode2025.Puzzles
         {
             var lines = useExample ? GetExampleData() : File.ReadAllLines(@"Puzzles\Input\InputPuzzle6.txt").ToList();
 
-            var solution = 0;
+            var solution = lines.First();
 
             Console.WriteLine($"Solution: {solution}");
         }
@@ -22,7 +22,7 @@ namespace AdventOfCode2025.Puzzles
         {
             return new List<string>
             {
-                "",
+                "TODO",
             };
         }
     }
