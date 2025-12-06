@@ -42,7 +42,7 @@ namespace AdventOfCode2025
                     case "q":
                         return;
                     case "h":
-                        Console.WriteLine("https://www.youtube.com/watch?v=2Q_ZzBGPdqE&list=RD2Q_ZzBGPdqE");
+                        Console.WriteLine("https://www.youtube.com/watch?v=2Q_ZzBGPdqE");
                         break;
                     default:
                         if (!_menu.TryGetValue(answer, out var puzzleAction))

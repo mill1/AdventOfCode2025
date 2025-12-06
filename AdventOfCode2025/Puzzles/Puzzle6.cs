@@ -94,9 +94,9 @@ namespace AdventOfCode2025.Puzzles
             {
                 // Skip problem separators
                 bool isSeparator = true;
-                for (int r = 0; r < rows; r++)
+                for (int row = 0; row < rows; row++)
                 {
-                    if (lines[r][col] != ' ')
+                    if (lines[row][col] != ' ')
                     {
                         isSeparator = false;
                         break;
@@ -114,9 +114,9 @@ namespace AdventOfCode2025.Puzzles
                 while (col < cols)
                 {
                     bool empty = true;
-                    for (int r = 0; r < rows; r++)
+                    for (int row = 0; row < rows; row++)
                     {
-                        if (lines[r][col] != ' ')
+                        if (lines[row][col] != ' ')
                         {
                             empty = false;
                             break;
