@@ -11,7 +11,7 @@ namespace AdventOfCode2025.Puzzles
 
             long grandTotal = 0;
 
-            for (int i = 0; i < problems[1].Count; i++)
+            for (int i = 0; i < problems[0].Count; i++)
             {
                 long total = 0;
 
