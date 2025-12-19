@@ -21,6 +21,7 @@ namespace AdventOfCode2025
                 [6] = new Puzzle6(),
                 [7] = new Puzzle7(),
                 [8] = new Puzzle8(),
+                [9] = new Puzzle9(),
             };
 
             foreach (var (day, puzzle) in puzzles)

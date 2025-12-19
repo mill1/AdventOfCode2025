@@ -59,6 +59,7 @@ namespace AdventOfCode2025.Puzzles
         private long SplitAt(long[] counts, int col)
         {
             long count = counts[col];
+
             if (count == 0)
                 return 0;
 
@@ -92,5 +93,4 @@ namespace AdventOfCode2025.Puzzles
         };
         }
     }
-
 }

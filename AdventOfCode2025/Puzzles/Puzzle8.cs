@@ -4,15 +4,11 @@ namespace AdventOfCode2025.Puzzles
 {
     public class Puzzle8 : IPuzzle
     {
+        public void Part1(bool useExample) 
+            => Console.WriteLine($"Total: {Solve(useExample, true)}");
 
-        public void Part1(bool useExample)
-        {
-            Console.WriteLine($"Total: {Solve(useExample, true)}");
-        }
         public void Part2(bool useExample)
-        {
-            Console.WriteLine($"Total: {Solve(useExample, false)}");
-        }
+            => Console.WriteLine($"Total: {Solve(useExample, false)}");
 
         private long Solve(bool useExample, bool part1)
         {
