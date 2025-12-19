@@ -5,52 +5,108 @@ namespace AdventOfCode2025.Puzzles
     public class Puzzle9 : IPuzzle
     {
         public void Part1(bool useExample)
+            => Console.WriteLine($"Max: {Solve(useExample).part1}");
+
+        public void Part2(bool useExample)
+            => Console.WriteLine($"Max: {Solve(useExample).part2}");
+
+        private (long part1, long part2) Solve(bool useExample)
         {
-            var gridLocations = ParseGridLocations(useExample);
+            var coords = ParseGridLocations(useExample);
+            var (horizontal, vertical) = BuildEdges(coords);
 
-            var maxArea = 0L;
+            return ResolveMaxRectangleAreas(coords, horizontal, vertical);
+        }
 
-            foreach (var loc1 in gridLocations)
+        private static (List<(int Y, int X1, int X2)> horizontal, List<(int X, int Y1, int Y2)> vertical) BuildEdges(List<(int X, int Y)> coords)
+        {
+            var horizontal = new List<(int, int, int)>();
+            var vertical = new List<(int, int, int)>();
+
+            for (int i = 0; i < coords.Count; i++)
             {
-                foreach (var loc2 in gridLocations)
+                var a = coords[i];
+                var b = coords[(i + 1) % coords.Count];
+
+                if (a.Y == b.Y)
+                    horizontal.Add((a.Y, Math.Min(a.X, b.X), Math.Max(a.X, b.X)));
+                else
+                    vertical.Add((a.X, Math.Min(a.Y, b.Y), Math.Max(a.Y, b.Y)));
+            }
+
+            return (horizontal, vertical);
+        }
+
+        private static (long part1, long part2) ResolveMaxRectangleAreas(
+            List<(int X, int Y)> coords,
+            List<(int Y, int X1, int X2)> horizontal,
+            List<(int X, int Y1, int Y2)> vertical)
+        {
+            long maxPart1 = 0;
+            long maxPart2 = 0;
+
+            for (int i = 0; i < coords.Count; i++)
+            {
+                for (int j = i + 1; j < coords.Count; j++)
                 {
-                    if (loc1 == loc2)
-                        continue;
+                    var rect = NormalizeRectangle(coords[i], coords[j]);
+                    long area = (rect.MaxX - rect.MinX + 1L) * (rect.MaxY - rect.MinY + 1L);
 
-                    if (loc2.Row < loc1.Row || loc2.Col < loc1.Col)
-                        continue;
+                    maxPart1 = Math.Max(maxPart1, area);
 
-                    var dRow = loc2.Row - loc1.Row + 1;
-                    var dCol = loc2.Col - loc1.Col + 1;
-
-                    var area = dRow * dCol;
-
-                    if (area > maxArea)
-                        maxArea = area;
+                    if (IsRectangleValid(rect, horizontal, vertical))
+                        maxPart2 = Math.Max(maxPart2, area);
                 }
             }
 
-
-            Console.WriteLine($"Max: {maxArea}");
+            return (maxPart1, maxPart2);
         }
 
-        public void Part2(bool useExample)
+        private static (int MinX, int MaxX, int MinY, int MaxY) NormalizeRectangle((int X, int Y) a, (int X, int Y) b)
         {
-            throw new NotImplementedException();
+            return (
+                Math.Min(a.X, b.X),
+                Math.Max(a.X, b.X),
+                Math.Min(a.Y, b.Y),
+                Math.Max(a.Y, b.Y)
+            );
         }
 
-        private List<(long Row, long Col)> ParseGridLocations(bool useExample) // Y, X
+        private static bool IsRectangleValid(
+            (int MinX, int MaxX, int MinY, int MaxY) r,
+            List<(int Y, int X1, int X2)> horizontal,
+            List<(int X, int Y1, int Y2)> vertical)
         {
-            var lines = useExample ? GetExampleData() : File.ReadAllLines(this.GetPathInputFile()).ToList();
+            foreach (var (y, x1, x2) in horizontal)
+            {
+                if (y > r.MinY && y < r.MaxY && x1 < r.MaxX && x2 > r.MinX)
+                    return false;
+            }
+
+            foreach (var (x, y1, y2) in vertical)
+            {
+                if (x > r.MinX && x < r.MaxX && y1 < r.MaxY && y2 > r.MinY)
+                    return false;
+            }
+
+            return true;
+        }
+
+
+        private List<(int X, int Y)> ParseGridLocations(bool useExample)
+        {
+            var lines = useExample
+                ? GetExampleData()
+                : File.ReadAllLines(this.GetPathInputFile()).ToList();
 
             return lines
                 .Select(line =>
                 {
-                    var c = line.Split(',').Select(long.Parse).ToArray();
-                    return (c[1], c[0]);
-                }).ToList();
+                    var c = line.Split(',').Select(int.Parse).ToArray();
+                    return (c[0], c[1]);
+                })
+                .ToList();
         }
-
 
         private static List<string> GetExampleData()
         {
