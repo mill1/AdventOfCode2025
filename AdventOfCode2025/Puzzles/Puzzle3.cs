@@ -6,7 +6,7 @@ namespace AdventOfCode2025.Puzzles
     {
         public void Part1(bool useExample)
         {
-            var lines = useExample ? GetExampleData() : File.ReadAllLines(@"Puzzles\Input\InputPuzzle3.txt").ToList();
+            var lines = useExample ? GetExampleData() : File.ReadAllLines(this.GetPathInputFile()).ToList();
 
             int sum = 0;
 
@@ -46,7 +46,7 @@ namespace AdventOfCode2025.Puzzles
 
         public void Part2(bool useExample)
         {
-            var lines = useExample ? GetExampleData() : File.ReadAllLines(@"Puzzles\Input\InputPuzzle3.txt").ToList();
+            var lines = useExample ? GetExampleData() : File.ReadAllLines(this.GetPathInputFile()).ToList();
 
             long sum = 0;
 

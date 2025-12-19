@@ -7,7 +7,7 @@ namespace AdventOfCode2025.Puzzles
         public void Part1(bool useExample)
         {
             // Read all rotation instructions from inputDay1.txt (or replace as needed)
-            var lines = useExample ? GetExampleData() : File.ReadAllLines(@"Puzzles\Input\InputPuzzle1.txt").ToList();
+            var lines = useExample ? GetExampleData() : File.ReadAllLines(this.GetPathInputFile()).ToList();
 
             int position = 50;
             int zeroCount = 0;
@@ -38,7 +38,7 @@ namespace AdventOfCode2025.Puzzles
 
         public void Part2(bool useExample)
         {
-            var lines = useExample ? GetExampleData() : File.ReadAllLines(@"Puzzles\Input\InputPuzzle1.txt").ToList();
+            var lines = useExample ? GetExampleData() : File.ReadAllLines(this.GetPathInputFile()).ToList();
 
             int position = 50;
             int zeroCount = 0;

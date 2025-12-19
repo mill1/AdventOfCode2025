@@ -1,4 +1,5 @@
 ﻿using AdventOfCode2025.Puzzles;
+using AdventOfCode2025.Puzzles.Interfaces;
 
 namespace AdventOfCode2025
 {
@@ -7,22 +8,22 @@ namespace AdventOfCode2025
         private readonly Dictionary<string, Action<bool>> _menu;
 
         public UI()
-        {           
-            _menu = new Dictionary<string, Action<bool>>(StringComparer.OrdinalIgnoreCase)
+        {
+            _menu = new Dictionary<string, Action<bool>>(StringComparer.OrdinalIgnoreCase);
+
+            var puzzles = new Dictionary<int, IPuzzle>
             {
-                ["1a"] = new Puzzle1().Part1,
-                ["1b"] = new Puzzle1().Part2,
-                ["2a"] = new Puzzle2().Part1,
-                ["2b"] = new Puzzle2().Part2,
-                ["3a"] = new Puzzle3().Part1,
-                ["3b"] = new Puzzle3().Part2,
-                ["4a"] = new Puzzle4().Part1,
-                ["4b"] = new Puzzle4().Part2,
-                ["5a"] = new Puzzle5().Part1,
-                ["5b"] = new Puzzle5().Part2,
-                ["6a"] = new Puzzle6().Part1,
-                ["6b"] = new Puzzle6().Part2,
+                [1] = new Puzzle1(),
+                [2] = new Puzzle2(),
+                [3] = new Puzzle3(),
+                [4] = new Puzzle4(),
+                [5] = new Puzzle5(),
+                [6] = new Puzzle6(),
+                [7] = new Puzzle7(),
             };
+
+            foreach (var (day, puzzle) in puzzles)
+                Register(day, puzzle);
         }
 
         public void Run()
@@ -97,6 +98,12 @@ namespace AdventOfCode2025
 
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        private void Register(int day, IPuzzle puzzle)
+        {
+            _menu[$"{day}a"] = puzzle.Part1;
+            _menu[$"{day}b"] = puzzle.Part2;
         }
     }
 }

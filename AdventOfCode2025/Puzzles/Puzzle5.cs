@@ -6,7 +6,7 @@ namespace AdventOfCode2025.Puzzles
     {
         public void Part1(bool useExample)
         {
-            var lines = useExample ? GetExampleData() : File.ReadAllLines(@"Puzzles\Input\InputPuzzle5.txt").ToList();
+            var lines = useExample ? GetExampleData() : File.ReadAllLines(this.GetPathInputFile()).ToList();
             int divider = lines.IndexOf("");            
             var idRanges = GetIdRanges(lines, divider);
 
@@ -22,7 +22,7 @@ namespace AdventOfCode2025.Puzzles
 
         public void Part2(bool useExample)
         {
-            var lines = useExample ? GetExampleData() : File.ReadAllLines(@"Puzzles\Input\InputPuzzle5.txt").ToList();
+            var lines = useExample ? GetExampleData() : File.ReadAllLines(this.GetPathInputFile()).ToList();
             int divider = lines.IndexOf("");
             var idRanges = GetIdRanges(lines, divider);
 

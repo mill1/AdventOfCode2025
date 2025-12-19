@@ -6,7 +6,7 @@ namespace AdventOfCode2025.Puzzles
     {
         public void Part1(bool useExample)
         {
-            var grid = useExample ? GetExampleData() : File.ReadAllLines(@"Puzzles\Input\InputPuzzle4.txt").ToList();
+            var grid = useExample ? GetExampleData() : File.ReadAllLines(this.GetPathInputFile()).ToList();
 
             var sum = 0;
 
@@ -21,7 +21,7 @@ namespace AdventOfCode2025.Puzzles
 
         public void Part2(bool useExample)
         {
-            var grid = useExample ? GetExampleData() : File.ReadAllLines(@"Puzzles\Input\InputPuzzle4.txt").ToList();
+            var grid = useExample ? GetExampleData() : File.ReadAllLines(this.GetPathInputFile()).ToList();
 
             int removedCount = 1;
             int sum = 0;

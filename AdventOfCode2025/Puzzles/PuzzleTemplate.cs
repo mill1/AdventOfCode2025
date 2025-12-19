@@ -6,7 +6,7 @@ namespace AdventOfCode2025.Puzzles
     {
         public void Part1(bool useExample)
         {
-            var lines = useExample ? GetExampleData() : File.ReadAllLines(@"Puzzles\Input\InputPuzzleX.txt").ToList();
+            var lines = useExample ? GetExampleData() : File.ReadAllLines(this.GetPathInputFile()).ToList();
 
             var solution = 0;
 

@@ -7,7 +7,7 @@ namespace AdventOfCode2025.Puzzles
         public void Part1(bool useExample)
         {
             {
-                string input = useExample ? GetExampleData() : File.ReadAllText(@"Puzzles\Input\InputPuzzle2.txt").Trim();
+                string input = useExample ? GetExampleData() : File.ReadAllText(this.GetPathInputFile()).Trim();
 
                 long total = 0;
 
@@ -40,7 +40,7 @@ namespace AdventOfCode2025.Puzzles
 
         public void Part2(bool useExample)
         {
-            string input = useExample ? GetExampleData() : File.ReadAllText(@"Puzzles\Input\InputPuzzle2.txt").Trim();
+            string input = useExample ? GetExampleData() : File.ReadAllText(this.GetPathInputFile()).Trim();
 
             long total = 0;
 
