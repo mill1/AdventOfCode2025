@@ -7,50 +7,71 @@ namespace AdventOfCode2025.Puzzles
 
         public void Part1(bool useExample)
         {
-            Console.WriteLine($"Total: {Solve(useExample, true)}");
+            Console.WriteLine($"Total: {Solve(useExample).part1}");
         }
         public void Part2(bool useExample)
         {
-            Console.WriteLine($"Total: {Solve(useExample, false)}");
+            Console.WriteLine($"Total: {Solve(useExample).part2}");
         }
 
-        private long Solve(bool useExample, bool part1)
+        private (long part1, long part2) Solve(bool useExample)
         {
-            long totalPart1 = 0L;
-            long totalPart2 = 0L;
+            var grid = LoadGrid(useExample);
+            var state = InitializeState(grid);
 
-            var grid = useExample
-                            ? GetExampleData().Select(line => line.ToCharArray()).ToList()
-                            : File.ReadAllLines(this.GetPathInputFile()).Select(line => line.ToCharArray()).ToList();
+            long part1 = Simulate(grid, state);
+            long part2 = state.RowCounts.Sum();
 
-            var rowCounts = new long[grid.Count];
+            return (part1, part2);
+        }
 
-            // Find starting position
-            int startIndex = Array.IndexOf(grid[0], 'S');
+        private List<char[]> LoadGrid(bool useExample)
+        {
+            var lines = useExample
+                ? GetExampleData()
+                : File.ReadAllLines(this.GetPathInputFile()).ToList();
 
-            rowCounts[startIndex] = 1;
+            return lines.Select(l => l.ToCharArray()).ToList();
+        }
 
-            for (var row = 1; row < grid.Count; row++)
+        private SimulationState InitializeState(List<char[]> grid)
+        {
+            int startCol = Array.IndexOf(grid[0], 'S');
+
+            var state = new SimulationState(grid[0].Length);
+            state.RowCounts[startCol] = 1;
+
+            return state;
+        }
+
+        private long Simulate(List<char[]> grid, SimulationState state)
+        {
+            long usedSplitters = 0;
+
+            for (int row = 1; row < grid.Count; row++)
             {
-                for (var col = 0; col < grid[0].Length; col++)
+                for (int col = 0; col < grid[row].Length; col++)
                 {
                     if (grid[row][col] == '^')
-                    {
-                        var count = rowCounts[col];
-                        rowCounts[col - 1] += count;
-                        rowCounts[col] = 0;
-                        rowCounts[col + 1] += count;
-
-                        if (count > 0)
-                            totalPart1++;
-                    }
+                        usedSplitters += SplitAt(state.RowCounts, col);
                 }
             }
 
-            foreach (var count in rowCounts)
-                totalPart2 += count;
+            return usedSplitters;
+        }
 
-            return part1 ? totalPart1 : totalPart2;
+
+        private long SplitAt(long[] counts, int col)
+        {
+            long count = counts[col];
+            if (count == 0)
+                return 0;
+
+            counts[col - 1] += count;
+            counts[col + 1] += count;
+            counts[col] = 0;
+
+            return 1;
         }
 
         private static List<string> GetExampleData()
@@ -74,6 +95,16 @@ namespace AdventOfCode2025.Puzzles
                 ".^.^.^.^.^...^.",
                 "..............."
             };
+        }
+
+        private class SimulationState
+        {
+            public long[] RowCounts { get; }
+
+            public SimulationState(int width)
+            {
+                RowCounts = new long[width];
+            }
         }
     }
 }
