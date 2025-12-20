@@ -73,39 +73,31 @@ namespace AdventOfCode2025.Puzzles
         }
 
         private static bool IsRectangleValid(
-            (int MinX, int MaxX, int MinY, int MaxY) r,
+            (int MinX, int MaxX, int MinY, int MaxY) rect,
             List<(int Y, int X1, int X2)> horizontal,
             List<(int X, int Y1, int Y2)> vertical)
         {
             foreach (var (y, x1, x2) in horizontal)
-            {
-                if (y > r.MinY && y < r.MaxY && x1 < r.MaxX && x2 > r.MinX)
+                if (y > rect.MinY && y < rect.MaxY && x1 < rect.MaxX && x2 > rect.MinX)
                     return false;
-            }
 
             foreach (var (x, y1, y2) in vertical)
-            {
-                if (x > r.MinX && x < r.MaxX && y1 < r.MaxY && y2 > r.MinY)
+                if (x > rect.MinX && x < rect.MaxX && y1 < rect.MaxY && y2 > rect.MinY)
                     return false;
-            }
 
             return true;
         }
 
-
         private List<(int X, int Y)> ParseGridLocations(bool useExample)
         {
-            var lines = useExample
-                ? GetExampleData()
-                : File.ReadAllLines(this.GetPathInputFile()).ToList();
+            var lines = useExample ? GetExampleData() : File.ReadAllLines(this.GetPathInputFile()).ToList();
 
             return lines
                 .Select(line =>
                 {
-                    var c = line.Split(',').Select(int.Parse).ToArray();
-                    return (c[0], c[1]);
-                })
-                .ToList();
+                    var coor = line.Split(',').Select(int.Parse).ToArray();
+                    return (coor[0], coor[1]);
+                }).ToList();
         }
 
         private static List<string> GetExampleData()
