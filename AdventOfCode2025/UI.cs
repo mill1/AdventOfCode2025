@@ -33,11 +33,8 @@ namespace AdventOfCode2025
 
             while (true)
             {
-                WriteFormatted(ConsoleColor.Black, ConsoleColor.Yellow, "\r\nEnter puzzle (e.g. ", false);
-                WriteFormatted(ConsoleColor.Black, ConsoleColor.Green, "2a", false);
-                WriteFormatted(ConsoleColor.Black, ConsoleColor.Yellow, " for Day 2 part 1).");                    
-                WriteFormatted(ConsoleColor.Black, ConsoleColor.Yellow, "Available: " + string.Join(", ", _menu.Keys) + "\r\nOr enter q to quit.");
-                
+                PrintMenu();
+
                 var answer = (Console.ReadLine() ?? "").Trim();
 
                 switch (answer)
@@ -110,6 +107,13 @@ namespace AdventOfCode2025
             var digits = new string(typeName.SkipWhile(c => !char.IsDigit(c)).ToArray());
 
             return int.TryParse(digits, out int day) ? day : null;
+        }
+        private void PrintMenu()
+        {
+            WriteFormatted(ConsoleColor.Black, ConsoleColor.Yellow, "\r\nEnter puzzle (e.g. ", false);
+            WriteFormatted(ConsoleColor.Black, ConsoleColor.Green, "2a", false);
+            WriteFormatted(ConsoleColor.Black, ConsoleColor.Yellow, " for Day 2 part 1).");
+            WriteFormatted(ConsoleColor.Black, ConsoleColor.Yellow, "Available: " + string.Join(", ", _menu.Keys) + "\r\nOr enter q to quit.");
         }
     }
 }
