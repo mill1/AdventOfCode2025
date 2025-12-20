@@ -1,5 +1,4 @@
-﻿using AdventOfCode2025.Puzzles;
-using AdventOfCode2025.Puzzles.Interfaces;
+﻿using AdventOfCode2025.Puzzles.Interfaces;
 
 namespace AdventOfCode2025
 {
@@ -11,21 +10,21 @@ namespace AdventOfCode2025
         {
             _menu = new Dictionary<string, Action<bool>>(StringComparer.OrdinalIgnoreCase);
 
-            var puzzles = new Dictionary<int, IPuzzle>
-            {
-                [1] = new Puzzle1(),
-                [2] = new Puzzle2(),
-                [3] = new Puzzle3(),
-                [4] = new Puzzle4(),
-                [5] = new Puzzle5(),
-                [6] = new Puzzle6(),
-                [7] = new Puzzle7(),
-                [8] = new Puzzle8(),
-                [9] = new Puzzle9(),
-            };
+            var puzzleTypes = typeof(IPuzzle).Assembly.GetTypes()
+                .Where(t => typeof(IPuzzle).IsAssignableFrom(t) && !t.IsAbstract && t.Name.StartsWith("Puzzle"))
+                .Select(t => new
+                {
+                    Type = t,
+                    Day = ParseDay(t.Name)
+                })
+                .Where(x => x.Day.HasValue)
+                .OrderBy(x => x.Day!.Value);
 
-            foreach (var (day, puzzle) in puzzles)
-                Register(day, puzzle);
+            foreach (var puzzle in puzzleTypes)
+            {
+                var instance = (IPuzzle)Activator.CreateInstance(puzzle.Type)!;
+                Register(puzzle.Day!.Value, instance);
+            }
         }
 
         public void Run()
@@ -34,7 +33,7 @@ namespace AdventOfCode2025
 
             while (true)
             {
-                WriteFormatted(ConsoleColor.Black, ConsoleColor.Yellow, "\r\nWhich puzzle? (e.g. 2a for Day 2 part 1)." +
+                WriteFormatted(ConsoleColor.Black, ConsoleColor.Yellow, "\r\nSelect puzzle (e.g. 2a for Day 2 part 1)." +
                     "\r\nAvailable: " + string.Join(", ", _menu.Keys));
                 WriteFormatted(ConsoleColor.Black, ConsoleColor.Yellow, "Or enter h for help or q to quit.");
                 
@@ -106,6 +105,13 @@ namespace AdventOfCode2025
         {
             _menu[$"{day}a"] = puzzle.Part1;
             _menu[$"{day}b"] = puzzle.Part2;
+        }
+
+        private static int? ParseDay(string typeName)
+        {
+            var digits = new string(typeName.SkipWhile(c => !char.IsDigit(c)).ToArray());
+
+            return int.TryParse(digits, out int day) ? day : null;
         }
     }
 }

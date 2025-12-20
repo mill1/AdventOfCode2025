@@ -2,7 +2,7 @@
 
 namespace AdventOfCode2025.Puzzles
 {
-    public class Puzzle9 : IPuzzle
+    public class Puzzle09 : IPuzzle
     {
         public void Part1(bool useExample)
             => Console.WriteLine($"Max: {Solve(useExample).part1}");

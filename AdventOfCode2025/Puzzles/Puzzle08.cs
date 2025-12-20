@@ -2,7 +2,7 @@
 
 namespace AdventOfCode2025.Puzzles
 {
-    public class Puzzle8 : IPuzzle
+    public class Puzzle08 : IPuzzle
     {
         public void Part1(bool useExample) 
             => Console.WriteLine($"Total: {Solve(useExample, true)}");

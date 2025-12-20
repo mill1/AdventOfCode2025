@@ -8,31 +8,34 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="Puzzles\Input\InputPuzzle1.txt">
+    <None Update="Puzzles\Input\InputPuzzle01.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Puzzles\Input\InputPuzzle2.txt">
+    <None Update="Puzzles\Input\InputPuzzle02.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Puzzles\Input\InputPuzzle3.txt">
+    <None Update="Puzzles\Input\InputPuzzle03.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Puzzles\Input\InputPuzzle4.txt">
+    <None Update="Puzzles\Input\InputPuzzle04.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Puzzles\Input\InputPuzzle9.txt">
+    <None Update="Puzzles\Input\InputPuzzle10.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Puzzles\Input\InputPuzzle8.txt">
+    <None Update="Puzzles\Input\InputPuzzle09.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Puzzles\Input\InputPuzzle7.txt">
+    <None Update="Puzzles\Input\InputPuzzle08.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Puzzles\Input\InputPuzzle6.txt">
+    <None Update="Puzzles\Input\InputPuzzle07.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Puzzles\Input\InputPuzzle5.txt">
+    <None Update="Puzzles\Input\InputPuzzle06.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Puzzles\Input\InputPuzzle05.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

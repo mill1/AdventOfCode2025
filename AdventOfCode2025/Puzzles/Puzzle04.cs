@@ -2,7 +2,7 @@
 
 namespace AdventOfCode2025.Puzzles
 {
-    public class Puzzle4 : IPuzzle
+    public class Puzzle04 : IPuzzle
     {
         public void Part1(bool useExample)
         {
