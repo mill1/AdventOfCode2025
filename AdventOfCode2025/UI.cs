@@ -18,7 +18,7 @@ namespace AdventOfCode2025
                     Day = ParseDay(t.Name)
                 })
                 .Where(x => x.Day.HasValue)
-                .OrderBy(x => x.Day!.Value);
+                .OrderBy(x => x.Day.Value);
 
             foreach (var puzzle in puzzleTypes)
             {
@@ -33,9 +33,10 @@ namespace AdventOfCode2025
 
             while (true)
             {
-                WriteFormatted(ConsoleColor.Black, ConsoleColor.Yellow, "\r\nSelect puzzle (e.g. 2a for Day 2 part 1)." +
-                    "\r\nAvailable: " + string.Join(", ", _menu.Keys));
-                WriteFormatted(ConsoleColor.Black, ConsoleColor.Yellow, "Or enter h for help or q to quit.");
+                WriteFormatted(ConsoleColor.Black, ConsoleColor.Yellow, "\r\nEnter puzzle (e.g. ", false);
+                WriteFormatted(ConsoleColor.Black, ConsoleColor.Green, "2a", false);
+                WriteFormatted(ConsoleColor.Black, ConsoleColor.Yellow, " for Day 2 part 1).");                    
+                WriteFormatted(ConsoleColor.Black, ConsoleColor.Yellow, "Available: " + string.Join(", ", _menu.Keys) + "\r\nOr enter q to quit.");
                 
                 var answer = (Console.ReadLine() ?? "").Trim();
 
@@ -43,9 +44,6 @@ namespace AdventOfCode2025
                 {
                     case "q":
                         return;
-                    case "h":
-                        Console.WriteLine("https://www.youtube.com/watch?v=2Q_ZzBGPdqE");
-                        break;
                     default:
                         if (!_menu.TryGetValue(answer, out var puzzleAction))
                         {
